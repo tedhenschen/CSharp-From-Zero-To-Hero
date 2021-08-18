@@ -1,13 +1,40 @@
-﻿namespace BootCamp.Chapter
+﻿using System;
+using System.Globalization;
+
+namespace BootCamp.Chapter
 {
     public static class BalanceStats
     {
         /// <summary>
         /// Return name and balance(current) of person who had the biggest historic balance.
         /// </summary>
+        /// 
+
+        CultureInfo.CurrentCulture = new CultureInfo("");
+
+
         public static string FindHighestBalanceEver(string[] peopleAndBalances)
         {
-            return "";
+
+            int highestBalance = 0;
+            string name = "";
+
+            foreach (var person in peopleAndBalances)
+            {
+                string[] balances = person.Split(',');
+               
+                foreach (string balance in balances)
+                {
+                    Int32.TryParse(balance, out int currentBalance);
+
+                    if (currentBalance > highestBalance)
+                    {
+                        highestBalance = currentBalance;
+                        name = balances[0];
+                    }
+                }
+            }
+            return $"{name} had the most money ever. {highestBalance.ToString("C0")}.";
         }
 
         /// <summary>
@@ -15,7 +42,34 @@
         /// </summary>
         public static string FindPersonWithBiggestLoss(string[] peopleAndBalances)
         {
-            return "";
+            int biggestLoss = 0;
+            string name = "";
+
+            foreach (var person in peopleAndBalances)
+            {
+                string[] balances = person.Split(',');
+                int length = balances.Length;
+                int currentBalance = 0;
+                int previousBalance = 0;
+
+                for (int i = 1; i < length; i++)
+                {
+                    int loss = 0;
+                    Int32.TryParse(balances[i], out currentBalance);
+
+                    loss = previousBalance - currentBalance;
+                    
+                    if (loss > biggestLoss)
+                    {
+                        biggestLoss = loss;
+                        name = balances[0];
+                    }
+
+                }
+
+            }
+
+            return $"{name}  -  {biggestLoss.ToString()}";
         }
 
         /// <summary>
