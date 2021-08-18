@@ -9,13 +9,9 @@ namespace BootCamp.Chapter
         /// Return name and balance(current) of person who had the biggest historic balance.
         /// </summary>
         /// 
-
-        CultureInfo.CurrentCulture = new CultureInfo("");
-
-
         public static string FindHighestBalanceEver(string[] peopleAndBalances)
         {
-
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             int highestBalance = 0;
             string name = "";
 
@@ -26,8 +22,17 @@ namespace BootCamp.Chapter
                 foreach (string balance in balances)
                 {
                     Int32.TryParse(balance, out int currentBalance);
-
-                    if (currentBalance > highestBalance)
+                    if (currentBalance == highestBalance || name == "")
+                    {
+                        //highestBalance = currentBalance;
+                        name = balances[0];
+                    }
+                    else if (currentBalance == highestBalance || name != "")
+                    {
+                        //highestBalance = currentBalance;
+                        name = $"{name} and {balances[0]}";
+                    }
+                    else if (currentBalance > highestBalance)
                     {
                         highestBalance = currentBalance;
                         name = balances[0];
@@ -42,6 +47,7 @@ namespace BootCamp.Chapter
         /// </summary>
         public static string FindPersonWithBiggestLoss(string[] peopleAndBalances)
         {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             int biggestLoss = 0;
             string name = "";
 
