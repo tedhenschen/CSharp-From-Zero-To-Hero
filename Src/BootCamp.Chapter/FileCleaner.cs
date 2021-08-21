@@ -7,6 +7,7 @@ namespace BootCamp.Chapter
 {
     public static class FileCleaner
     {
+
         /// <summary>
         /// Cleans up dirtyFileName 
         /// </summary>
@@ -14,6 +15,10 @@ namespace BootCamp.Chapter
         /// <param name="cleanedFile">Cleaned up file without any "_".</param>
         public static void Clean(string dirtyFile, string cleanedFile)
         {
+
+        File.ReadAllText(dirtyFile);
+
+
             File.WriteAllText(cleanedFile, "a");
         }
     }
