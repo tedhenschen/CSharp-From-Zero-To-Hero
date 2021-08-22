@@ -15,11 +15,15 @@ namespace BootCamp.Chapter
         /// <param name="cleanedFile">Cleaned up file without any "_".</param>
         public static void Clean(string dirtyFile, string cleanedFile)
         {
+            if (dirtyFile == null || cleanedFile == null) throw new ArgumentException();
+            if (dirtyFile == "" || cleanedFile == "") throw new ArgumentException();
+            if (!(File.Exists(dirtyFile))) throw new ArgumentException();
 
-        File.ReadAllText(dirtyFile);
+            string corruptedData = File.ReadAllText(dirtyFile);
 
+            corruptedData = corruptedData.Replace("_","");
 
-            File.WriteAllText(cleanedFile, "a");
+            File.WriteAllText(cleanedFile, corruptedData);
         }
     }
 }

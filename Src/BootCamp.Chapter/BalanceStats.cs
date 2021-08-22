@@ -6,6 +6,7 @@ namespace BootCamp.Chapter
 {
     public static class BalanceStats
     {
+
         /// <summary>
         /// Return name and balance(current) of person who had the biggest historic balance.
         /// </summary>
@@ -17,6 +18,11 @@ namespace BootCamp.Chapter
             string name = "";
             string message = "";
             List<string> names = new List<string>();
+            var currencyCulture = new CultureInfo("en-GB");
+            currencyCulture.NumberFormat.CurrencyPositivePattern = 0;
+            currencyCulture.NumberFormat.CurrencyNegativePattern = 2;
+            currencyCulture.NumberFormat.CurrencyDecimalSeparator = CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalSeparator;
+
 
             if (peopleAndBalances == null || peopleAndBalances.Length == 0)
             {
@@ -30,9 +36,10 @@ namespace BootCamp.Chapter
 
                     foreach (string balance in balances)
                     {
-                        if (double.TryParse(balance, out double currentBalance))
-                        {
 
+                        if (double.TryParse(balance, NumberStyles.Currency, currencyCulture, out double currentBalance))
+                        {
+                            
                             if (currentBalance == highestBalance)
                             {
                                 names.Add(balances[0]);
@@ -48,9 +55,13 @@ namespace BootCamp.Chapter
                     }
                 }
 
-                if (names.Count <= 1)
+                if (names.Count == 0)
                 {
-                    name = names[0];
+                    name = "";
+                }
+                else if (names.Count == 1)
+                {
+                        name = names[0];
                 }
                 else if (names.Count == 2)
                 {
@@ -85,11 +96,18 @@ namespace BootCamp.Chapter
         /// </summary>
         public static string FindPersonWithBiggestLoss(string[] peopleAndBalances)
         {
+
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             double biggestLoss = 0;
             string name = "";
             string message = "";
             List<string> names = new List<string>();
+
+            var currencyCulture = new CultureInfo("en-GB");
+            currencyCulture.NumberFormat.CurrencyPositivePattern = 0;
+            currencyCulture.NumberFormat.CurrencyNegativePattern = 2;
+            currencyCulture.NumberFormat.CurrencyDecimalSeparator = CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalSeparator;
+
 
             if (peopleAndBalances == null || peopleAndBalances.Length == 0)
             {
@@ -104,7 +122,7 @@ namespace BootCamp.Chapter
 
                     foreach (string balance in balances)
                     {
-                        if (double.TryParse(balance, out double currentBalance))
+                        if (double.TryParse(balance, NumberStyles.Currency, currencyCulture, out double currentBalance))
                         {
                             double currentLoss = (currentBalance - previousBalance);
                             if (currentLoss == biggestLoss)
@@ -169,11 +187,18 @@ namespace BootCamp.Chapter
         /// </summary>
         public static string FindRichestPerson(string[] peopleAndBalances)
         {
+
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             double largestEndingBalance = 0;
             string name = "";
             string message = "";
             List<string> names = new List<string>();
+
+            var currencyCulture = new CultureInfo("en-GB");
+            currencyCulture.NumberFormat.CurrencyPositivePattern = 0;
+            currencyCulture.NumberFormat.CurrencyNegativePattern = 2;
+            currencyCulture.NumberFormat.CurrencyDecimalSeparator = CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalSeparator;
+
 
             if (peopleAndBalances == null || peopleAndBalances.Length == 0)
             {
@@ -186,7 +211,7 @@ namespace BootCamp.Chapter
                     string[] balances = person.Split(',');
                     int length = balances.Length - 1;
 
-                    if (double.TryParse(balances[length], out double EndingBalance))
+                    if (double.TryParse(balances[length], NumberStyles.Currency, currencyCulture, out double EndingBalance))
                     {
                         //double currentLoss = (currentBalance - previousBalance);
                         if (EndingBalance == largestEndingBalance)
@@ -255,6 +280,11 @@ namespace BootCamp.Chapter
             string name = "";
             string message = "";
             List<string> names = new List<string>();
+            var currencyCulture = new CultureInfo("en-GB");
+            currencyCulture.NumberFormat.CurrencyPositivePattern = 0;
+            currencyCulture.NumberFormat.CurrencyNegativePattern = 2;
+            currencyCulture.NumberFormat.CurrencyDecimalSeparator = CultureInfo.InvariantCulture.NumberFormat.CurrencyDecimalSeparator;
+
 
             if (peopleAndBalances == null || peopleAndBalances.Length == 0)
             {
@@ -267,7 +297,7 @@ namespace BootCamp.Chapter
                     string[] balances = person.Split(',');
                     int length = balances.Length - 1;
 
-                    if (double.TryParse(balances[length], out double EndingBalance))
+                    if (double.TryParse(balances[length], NumberStyles.Currency, currencyCulture, out double EndingBalance))
                     {
                         //double currentLoss = (currentBalance - previousBalance);
                         if (EndingBalance == smallestEndingBalance)
