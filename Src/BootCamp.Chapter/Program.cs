@@ -7,6 +7,9 @@ using System.Linq;
 #pragma warning disable 169
 #pragma warning disable 219
 
+
+
+
 namespace BootCamp.Chapter
 {
     [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
